@@ -8,12 +8,7 @@ const fs = require("fs");
 require("dotenv/config");
 const { Client, MessageMedia } = require("whatsapp-web.js");
 
-const bizSdk = require("facebook-nodejs-business-sdk");
 const { default: axios } = require("axios");
-
-const access_token = process.env.FB_ACCESS_TOKEN;
-const api = bizSdk.FacebookAdsApi.init(access_token);
-const Lead = bizSdk.Lead;
 
 const io = require("socket.io")(server, {
   cors: {
@@ -31,12 +26,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.json());
 
-const whatsappRouter = require("./routes/whatsapp");
-app.use("/whatsapp", whatsappRouter);
-
 // Listen to server
 server.listen(process.env.PORT || 5000, () =>
-  console.log("Server is listening " + "at " + process.env.PORT)
+  console.log("Server is listening " + "at " + (process.env.PORT || 5000))
 );
 
 const { allSessionsObj } = require("./values.js");
